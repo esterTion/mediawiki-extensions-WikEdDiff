@@ -13,5 +13,6 @@
 	"wiked-diff-block-right": "Moved ▶",
 	"wiked-diff-block-left-nounicode": "< Moved",
 	"wiked-diff-block-right-nounicode": "Moved >",
-	"wiked-diff-error": "Error: wikEdDiff output not consistent with original versions!"
+	"wiked-diff-error": "Error: wikEdDiff output not consistent with original versions!",
+	"wiked-diff-toggle": "Use WikEdDiff to compare differences"
 }

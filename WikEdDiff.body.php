@@ -151,6 +151,8 @@ class WikEdDifferenceEngine extends DifferenceEngine {
 	 * @return bool False for valid class name in $diffEngineClass, true for default
 	 */
 	public static function onGetDifferenceEngine ( $context, $old, $new, $refreshCache, $unhide, &$differenceEngine ) {
+		$enable = $context->getUser()->getOption( 'WikEdDiff-enable' );
+		if (!$enable) return true;
 		$differenceEngine = new WikEdDifferenceEngine( $context, $old, $new, $refreshCache, $unhide );
 		return false;
 	}
@@ -175,6 +177,17 @@ class WikEdDifferenceEngine extends DifferenceEngine {
 		$this->unhide = $unhide;
 	}
 
+	public function generateContentDiffBody( Content $old, Content $new ) {
+		return $this->generateTextDiffBody( $old->serialize(), $new->serialize() );
+	}
+	public static function onGetPreferences( $user, &$preferences ) {
+		$preferences['WikEdDiff-enable'] = [
+			'type' => 'toggle',
+			'label-message' => 'wiked-diff-toggle',
+			'section' => 'rendering/diffs'
+		];
+	}
+
 	/**
 	 * Generate a diff, no caching. Overriding parent class method.
 	 *
@@ -182,7 +195,7 @@ class WikEdDifferenceEngine extends DifferenceEngine {
 	 * @return string $diffText Diff html result
 	 */
 	public function generateTextDiffBody ( $otext, $ntext ) {
-$this->debug( '$this->mDiffLang', $this->mDiffLang);
+		$this->debug( '$this->mDiffLang', $this->mDiffLang);
 		global $wgContLang, $wgOut;
 
 		// Load js and css

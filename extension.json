@@ -30,7 +30,8 @@
 		"remoteExtPath": "WikEdDiff/modules"
 	},
 	"Hooks": {
-		"GetDifferenceEngine": "WikEdDifferenceEngine::onGetDifferenceEngine"
+		"GetDifferenceEngine": "WikEdDifferenceEngine::onGetDifferenceEngine",
+		"GetPreferences": "WikEdDifferenceEngine::onGetPreferences"
 	},
 	"manifest_version": 2
 }
